@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <h1>Client</h1>
+    <form onsubmit="calculate(); return false;">
+    <input type="text" id="firstName">
+<button>signup</button>
+
+</form>
+<br>
+<br>
+<br>
+<br>
+
+<p id="message"></p>
+<button onclick="getAllUsers()">getAllUsers</button>
+<p id="allUsers"></p>
+<script>
+    const calculate=()=>{
+   let firstName =document.querySelector("#firstName").value;
+ 
+      axios.post('http://localhost:5000/user', {
+    firstName: firstName,
+   
+  })
+  .then(function (response) {
+    console.log(response.data);
+    document.querySelector("#message").innerHTML = response.data;
+  })
+  .catch(function (error) {
+    console.log(error.message);
+  });
+
+
+    }
+
+function getAllUsers () {
+
+  axios.get('http://localhost:5000/user')
+
+
+  .then(function (response) {
+    console.log(response.data);
+    response.data.map(eachUser=>{
+      document.querySelector("#allUsers").innerHTML +=
+      `${eachUser.firstName}<br>`
+    })
+   
+  });
+  
+}
+ 
+
+
+
+
+
+</script>
+
+
+
+
+</body>
+</html>
