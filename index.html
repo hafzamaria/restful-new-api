@@ -10,7 +10,14 @@
 <body>
     <h1>Client</h1>
     <form onsubmit="calculate(); return false;">
-    <input type="text" id="firstName">
+      <label for="fullName">FirstName:</label>
+    <input type="text" id="fullName">
+
+    <label for="userName">UserName:</label>
+    <input type="text" id="userName">
+
+    <label for="password">Password:</label>
+    <input type="text" id="password">
 <button>signup</button>
 
 </form>
@@ -24,11 +31,15 @@
 <p id="allUsers"></p>
 <script>
     const calculate=()=>{
-   let firstName =document.querySelector("#firstName").value;
+   let fullName =document.querySelector("#fullName").value;
+   let userName =document.querySelector('#userName').value;
+   let password= document.querySelector('#password').value;
  
       axios.post('http://localhost:5000/user', {
-    firstName: firstName,
-   
+    fullName:fullName,
+    userName:userName,
+    password:password
+
   })
   .then(function (response) {
     console.log(response.data);
@@ -50,7 +61,7 @@ function getAllUsers () {
     console.log(response.data);
     response.data.map(eachUser=>{
       document.querySelector("#allUsers").innerHTML +=
-      `${eachUser.firstName}<br>`
+      `${eachUser.fullName}<br> ${eachYser.userName} <br> ${eachUser.password}`
     })
    
   });
