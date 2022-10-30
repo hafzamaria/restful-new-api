@@ -9,7 +9,7 @@ const port = process.env.PORT || 5000;
 
 let users =[];
 
-const randomNumber = ()=>{
+function randomNumber () {
     return Math.floor(Math.random() * 100000000000000);
 }
 
@@ -17,7 +17,7 @@ app.post('/user',(req,res) =>{
    console.log(req.body);
  
     let newUser ={
-        id:randomNumber,
+        id:randomNumber(),
         fullName:req.body.fullName,
         userName:req.body.userName,
         password:req.body.password
@@ -34,7 +34,7 @@ app.post('/user',(req,res) =>{
         let userId =req.params.userId;
         let isFound =false;
 
-        for(let i = 0; i<users.length; i++){
+        for(let i = 0; i <users.length; i++){
        if(users[i].Id == userId){
         res.send(users[i]);
         isFound =true;
